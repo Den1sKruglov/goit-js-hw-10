@@ -24,38 +24,38 @@ refs.searchField.addEventListener('input', debounce(searchFieldInput, DEBOUNCE_D
 
 function searchFieldInput(e) {
   const name = (e.target.value.trim());
-      if (name === '') {
-        return clearMarkup();
+  if (name === '') {
+    return clearMarkup();
   }
-  
-  console.log(name);
-      fetchCountries(name).then(data => {
-     
-      
-      if (data.length > 10) {
-        Notify.info("Too many matches found. Please enter a more specific name.");
-        clearMarkup();
-        
-       } if (data.length >= 2 && data.length <= 10) {
-        createCountriesList(data);
-        
-       } if (data.length === 1) {
-        createTargetCountry(data);
-        
-       }
 
-    }).catch(error => {
-      Notify.failure("Oops, there is no country with that name");
+  console.log(name);
+  fetchCountries(name).then(data => {
+
+
+    if (data.length > 10) {
+      Notify.info("Too many matches found. Please enter a more specific name.");
       clearMarkup();
-    });
-  
+
+    } if (data.length >= 2 && data.length <= 10) {
+      createCountriesList(data);
+
+    } if (data.length === 1) {
+      createTargetCountry(data);
+
+    }
+
+  }).catch(error => {
+    Notify.failure("Oops, there is no country with that name");
+    clearMarkup();
+  });
+
 }
 
 
 function createCountriesList(e) {
-  
+
   const makeCountryList = e.map(({ flags, name }) => {
-    
+
     return `<li class = 'country-list__item'>
       <img src="${flags.svg}" width = 50 alt = "flag of ${name.official}">
       <p class ='country-list__name'>${name.official}</p>
@@ -67,7 +67,7 @@ function createCountriesList(e) {
 
 function createTargetCountry(e) {
   const makeCountryList = e.map(({ flags, name }) => {
-    
+
     return `<li class = 'country-list__item'>
       <div class='img-wrap'>
       <img src="${flags.svg}" width = 100 alt = "flag of ${name.official}">
@@ -108,8 +108,8 @@ function clearMarkup() {
 
 
 
-        
- 
+
+
 
 
 
